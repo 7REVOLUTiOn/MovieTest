@@ -6,34 +6,50 @@
     android:layout_margin="15dp"
     app:cardCornerRadius="45dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@color/gray"
-        >
+        android:background="@color/gray">
 
         <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/posterImageView"
             android:src="@mipmap/ic_launcher"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="200dp"/>
 
         <TextView
             android:id="@+id/titleTextView"
             android:text="Title"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:textSize="20sp"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/yearTextView"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="Year"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/genre"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yearTextView"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
         
         
 

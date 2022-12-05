@@ -48,6 +48,7 @@ class RecyclerViewAdapter(
         if (movieBean != null) {
             holder.title.text = movieBean.title
             holder.year.text = movieBean.year
+            holder.genre.text = movieBean.type
             Picasso.get().load(movieBean.poster).fit().centerInside().into(holder.imageView)
         }
 
@@ -81,6 +82,7 @@ class RecyclerViewAdapter(
         val title = view.findViewById<TextView>(R.id.titleTextView)
         val year = view.findViewById<TextView>(R.id.yearTextView)
         val imageView = view.findViewById<ImageView>(R.id.posterImageView)
+        val genre = view.findViewById<TextView>(R.id.genre)
 
     }
 

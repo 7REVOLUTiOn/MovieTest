@@ -21,7 +21,7 @@ class SearcherFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater,container,false)
 
         return binding.root
@@ -29,6 +29,8 @@ class SearcherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.button.setOnClickListener(){
+            //findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2("superman"))
+            //findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2(binding.editText.text.toString()))
             findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2(binding.editText.text.toString()))
         }
     }
