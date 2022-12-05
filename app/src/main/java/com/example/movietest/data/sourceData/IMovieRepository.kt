@@ -1,4 +1,4 @@
-package com.example.movietest.data.DataSource
+package com.example.movietest.data.sourceData
 
 import com.example.movietest.domain.entity.MovieBean
 

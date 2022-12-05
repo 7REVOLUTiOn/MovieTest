@@ -3,6 +3,8 @@ package com.example.movietest.domain.entity
 
 import com.google.gson.annotations.SerializedName
 
+//TODO("bean - data слоя)
+
 data class MovieBean(
     @SerializedName("Response") val response: String?,
     @SerializedName("Search") val search: List<Search?>,

@@ -1,7 +1,7 @@
-package com.example.movietest.data.Retrofit
+package com.example.movietest.data.retrofit
 
-import com.example.movietest.domain.entity.Movie
 import com.example.movietest.domain.entity.MovieBean
+import com.example.movietest.domain.entity.MovieById
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +22,7 @@ interface MovieApi {
     suspend fun getMoviesId(
         @Query("i")searchText: String,
         @Query("apikey") apiKey: String = API_KEY
-    ):MovieBean
+    ):MovieById
 
 
     companion object {

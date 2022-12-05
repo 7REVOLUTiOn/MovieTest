@@ -1,8 +1,7 @@
-package com.example.movietest.data.DataSource
+package com.example.movietest.data.sourceData
 
 import android.util.Log
-import com.example.movietest.data.Retrofit.MovieApi
-import com.example.movietest.domain.entity.Movie
+import com.example.movietest.data.retrofit.MovieApi
 import com.example.movietest.domain.entity.MovieBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,6 +27,6 @@ class MovieRepositoryImpl(private val api: MovieApi = MovieApi.getInstance()) : 
             return@withContext result
 
         }
-
+        //TODO("Написать логи")
 
 }
