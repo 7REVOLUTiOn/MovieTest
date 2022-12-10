@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -48,9 +52,13 @@ class MoviesRVFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recycler_view_fragment, container, false)
     }
 
+    //
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
 
 
         observeViewModel(view)
@@ -81,8 +89,10 @@ class MoviesRVFragment : Fragment() {
         }
 
     private fun observeViewModel(view:View) {
+        val progressBar:ProgressBar = view.findViewById(R.id.progressBar)
         viewModel.rezult1.observe(viewLifecycleOwner){
             Log.d("EW","Вот здесь еще что то есть")
+            progressBar.isVisible = false
             setupRecyclerView(view,it)
     }
 

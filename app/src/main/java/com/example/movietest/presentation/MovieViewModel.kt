@@ -15,9 +15,9 @@ class MovieViewModel(
     private val application: Application
 ): ViewModel() {
 
-    private var _rezult = MutableLiveData<MovieById>()
-    val rezult: LiveData<MovieById>
-        get() = _rezult
+    private val _rezult = MutableLiveData<MovieById>()
+    val rezult: LiveData<MovieById> = _rezult
+
 
 
     init {
@@ -31,11 +31,18 @@ class MovieViewModel(
         id = id.replace("{","")
         id = id.replace("}","")
 
+        //TODO("Получать Bundle (или можно нормально через safeArgs), liveData для загрузки (анимации) ")
+        //Загрузка говорить грузится или не грузится, а уже сам фрагмент реагируует на эту лавй дату
+        //И сам рашает, что ему делать
+        //TODO("Реализивовать обьектный класс movie, который будет создаваться путем конвертации (movieBean -> обьектный класс) в data слое. И именно уже обьект
+        // передавать во вью модели. Также для передачи нужно создать посредника (функцию), через которую будет обращаться presentation слой к data слою.
+        // (presentation -> domain (fun) -> data")
+
         viewModelScope.launch{
             val retrofit = MovieApi.getInstance()
             _rezult.value = retrofit.getMoviesId(id)
         }
-
+        
 
     }
 

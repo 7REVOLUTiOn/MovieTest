@@ -1,5 +1,8 @@
 package com.example.movietest.data.retrofit
 
+
+import com.example.movietest.BuildConfig
+import com.example.movietest.data.sourceData.MyOkHttp
 import com.example.movietest.domain.entity.MovieBean
 import com.example.movietest.domain.entity.MovieById
 import okhttp3.OkHttpClient
@@ -30,11 +33,9 @@ interface MovieApi {
         private var movieApi: MovieApi? = null
         fun getInstance(): MovieApi {
             if (movieApi == null) {
-                val okHttpClient = OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(120, TimeUnit.SECONDS)
-                    .build()
+                val okHttpClient = MyOkHttp(
+                    isSafe = !BuildConfig.DEBUG
+                ).get()
                 val retrofit: Retrofit = Retrofit.Builder()
                     .baseUrl("https://www.omdbapi.com/")
                     .addConverterFactory(GsonConverterFactory.create())

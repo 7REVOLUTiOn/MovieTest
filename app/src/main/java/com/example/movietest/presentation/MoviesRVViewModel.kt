@@ -26,6 +26,7 @@ class MoviesRVViewModel(
     private fun startFragment() {
         args = args.replace("MoviesRVFragmentArgs{SearchName=","")
         args = args.replace("}","")
+        //TODO("Тоже самое что и в movie")
         val movieRepository: IMovieRepository = MovieRepositoryImpl()
         var rezult:List<MovieBean.Search?>
 

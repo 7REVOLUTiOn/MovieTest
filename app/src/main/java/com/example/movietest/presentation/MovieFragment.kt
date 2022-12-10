@@ -6,9 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.example.movietest.R
 import com.example.movietest.data.retrofit.MovieApi
 import com.example.movietest.databinding.FragmentMovieFromRecyclerViewBinding
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.lang.RuntimeException
@@ -23,7 +28,7 @@ class MovieFragment : Fragment() {
 
 
     private val viewModelFactory by lazy{
-        var args = MovieFragmentArgs.fromBundle(requireArguments()).toString()
+        val args = MovieFragmentArgs.fromBundle(requireArguments()).toString()
         MovieFragmentViewModelFactory(args, requireActivity().application)
     }
 
@@ -57,7 +62,9 @@ class MovieFragment : Fragment() {
         args = args.replace("}","")
         Log.d("321",args)*/
 
-        observeViewModel()
+
+
+        observeViewModel(view)
 
 //        MainScope().launch {
 //            val retrofit = MovieApi.getInstance()
@@ -69,16 +76,18 @@ class MovieFragment : Fragment() {
 //        }
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel(view:View){
+        val progressBar:ProgressBar = binding.progressBar
         viewModel.rezult.observe(viewLifecycleOwner){
+            progressBar.isVisible = false
+            Picasso.get().load(it.poster).fit().centerInside().into(binding.posterImageView)
             binding.titleTextView.text = it.title
             binding.plotTextView.text = it.plot
         }
-
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 }
