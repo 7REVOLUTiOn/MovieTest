@@ -12,12 +12,11 @@ import java.lang.RuntimeException
 
 class SearcherFragment : Fragment() {
 
-
     private var _binding:FragmentWelcomeBinding? = null
     private val binding:FragmentWelcomeBinding
         get() =_binding?:throw RuntimeException("FragmentSearchBiding == null")
 
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +30,9 @@ class SearcherFragment : Fragment() {
         binding.button.setOnClickListener(){
             //findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2("superman"))
             //findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2(binding.editText.text.toString()))
-            findNavController().navigate(SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2(binding.editText.text.toString()))
+            val text = binding.editText.text.toString()
+            val action = SearcherFragmentDirections.actionWelcomeFragmentToRecyclerViewFragmentFragment2(text)
+            findNavController().navigate(action)
         }
     }
 

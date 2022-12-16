@@ -10,6 +10,8 @@ import android.widget.ProgressBar
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import com.example.movietest.R
 import com.example.movietest.data.retrofit.MovieApi
 import com.example.movietest.databinding.FragmentMovieFromRecyclerViewBinding
@@ -28,8 +30,10 @@ class MovieFragment : Fragment() {
 
 
     private val viewModelFactory by lazy{
-        val args = MovieFragmentArgs.fromBundle(requireArguments()).toString()
-        MovieFragmentViewModelFactory(args, requireActivity().application)
+        //val args = MovieFragmentArgs.fromBundle(requireArguments()).toString()
+        val args: MovieFragmentArgs by navArgs()
+        val id = args.omdbId
+        MovieFragmentViewModelFactory(id, requireActivity().application)
     }
 
     private val viewModel:MovieViewModel by lazy {
@@ -53,7 +57,6 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         /*var args = MovieFragmentArgs.fromBundle(requireArguments()).toString()
         Log.d("newFragment","${args}")
         args = args.replace("","")
@@ -65,7 +68,6 @@ class MovieFragment : Fragment() {
 
 
         observeViewModel(view)
-
 //        MainScope().launch {
 //            val retrofit = MovieApi.getInstance()
 //            Log.d("321","$args")
@@ -79,16 +81,25 @@ class MovieFragment : Fragment() {
     private fun observeViewModel(view:View){
         val progressBar:ProgressBar = binding.progressBar
         viewModel.rezult.observe(viewLifecycleOwner){
-            progressBar.isVisible = false
+            Log.d("debugginh","$it")
             Picasso.get().load(it.poster).fit().centerInside().into(binding.posterImageView)
             binding.titleTextView.text = it.title
             binding.plotTextView.text = it.plot
+            binding.directorName.text = it.director
+            binding.genreName.text = it.genre
+            binding.yearName.text = it.year
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            if (it == false){
+                progressBar.isVisible = false
+            }
+            if (it == true){
+                progressBar.isVisible = true
+            }
         }
     }
 
-    private fun CLEAR(){
-
-    }
 
     override fun onDestroyView() {
         _binding = null

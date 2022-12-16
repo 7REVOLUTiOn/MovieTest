@@ -1,23 +1,25 @@
 package com.example.movietest.presentation
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.launch
 import androidx.lifecycle.*
-import com.example.movietest.data.retrofit.MovieApi
-import com.example.movietest.domain.entity.MovieById
+import com.example.movietest.data.sourceData.IMovieRepository
+import com.example.movietest.data.sourceData.MovieRepositoryImpl
+import com.example.movietest.domain.entity.MovieSingle
 
 class MovieViewModel(
     private var id:String,
     private val application: Application
 ): ViewModel() {
 
-    private val _rezult = MutableLiveData<MovieById>()
-    val rezult: LiveData<MovieById> = _rezult
+    private val _rezult = MutableLiveData<MovieSingle>()
+    val rezult: LiveData<MovieSingle> = _rezult
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading:LiveData<Boolean> = _isLoading
 
 
     init {
@@ -25,11 +27,7 @@ class MovieViewModel(
     }
 
     private fun startFragment() {
-
-        id = id.replace("","")
-        id = id.replace("MovieFragmentArgs{OmdbId=","")
-        id = id.replace("{","")
-        id = id.replace("}","")
+        val movieRepository: IMovieRepository = MovieRepositoryImpl()
 
         //TODO("Получать Bundle (или можно нормально через safeArgs), liveData для загрузки (анимации) ")
         //Загрузка говорить грузится или не грузится, а уже сам фрагмент реагируует на эту лавй дату
@@ -38,12 +36,14 @@ class MovieViewModel(
         // передавать во вью модели. Также для передачи нужно создать посредника (функцию), через которую будет обращаться presentation слой к data слою.
         // (presentation -> domain (fun) -> data")
 
-        viewModelScope.launch{
-            val retrofit = MovieApi.getInstance()
-            _rezult.value = retrofit.getMoviesId(id)
-        }
-        
 
+        viewModelScope.launch{
+
+            _isLoading.value = true
+            Log.d("debugginh","${movieRepository.getMovieById(id)}")
+            _rezult.value = movieRepository.getMovieById(id)
+            _isLoading.value = false
+        }
     }
 
 

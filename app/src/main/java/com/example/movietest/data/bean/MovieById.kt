@@ -1,4 +1,4 @@
-package com.example.movietest.domain.entity
+package com.example.movietest.data.bean
 
 
 import com.google.gson.annotations.SerializedName
@@ -17,14 +17,14 @@ data class MovieById(
     @SerializedName("Language") val language: String?,
     @SerializedName("Metascore") val metascore: String?,
     @SerializedName("Plot") val plot: String?,
-    @SerializedName("Poster") val poster: String?,
+    @SerializedName("Poster") val poster: String,
     @SerializedName("Production") val production: String?,
     @SerializedName("Rated") val rated: String?,
     @SerializedName("Ratings") val ratings: List<Rating?>?,
     @SerializedName("Released") val released: String?,
     @SerializedName("Response") val response: String?,
     @SerializedName("Runtime") val runtime: String?,
-    @SerializedName("Title") val title: String?,
+    @SerializedName("Title") val title: String,
     @SerializedName("Type") val type: String?,
     @SerializedName("Website") val website: String?,
     @SerializedName("Writer") val writer: String?,

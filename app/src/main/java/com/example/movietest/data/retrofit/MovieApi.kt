@@ -1,16 +1,15 @@
 package com.example.movietest.data.retrofit
 
 
+
 import com.example.movietest.BuildConfig
 import com.example.movietest.data.sourceData.MyOkHttp
-import com.example.movietest.domain.entity.MovieBean
-import com.example.movietest.domain.entity.MovieById
-import okhttp3.OkHttpClient
+import com.example.movietest.data.bean.MovieBean
+import com.example.movietest.data.bean.MovieById
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.concurrent.TimeUnit
 
 interface MovieApi {
     @GET("https://www.omdbapi.com/")
@@ -25,7 +24,7 @@ interface MovieApi {
     suspend fun getMoviesId(
         @Query("i")searchText: String,
         @Query("apikey") apiKey: String = API_KEY
-    ):MovieById
+    ): MovieById
 
 
     companion object {
@@ -45,6 +44,7 @@ interface MovieApi {
             }
             return movieApi!!
         }
+
     }
 }
 //https://www.omdbapi.com/?&s=superman&apikey=89335d00

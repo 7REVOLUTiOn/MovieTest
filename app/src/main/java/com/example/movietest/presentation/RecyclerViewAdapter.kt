@@ -8,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movietest.R
-import com.example.movietest.domain.entity.MovieBean
+import com.example.movietest.domain.entity.MovieAll
 import com.squareup.picasso.Picasso
 
 
 class RecyclerViewAdapter(
     private val rezult:
-    List<MovieBean.Search?>
+    List<MovieAll>
 ) :
     RecyclerView.Adapter<RecyclerViewAdapter.MovieItemViewHolder>() {
 
@@ -27,7 +27,7 @@ class RecyclerViewAdapter(
     var movieList = rezult
 
 
-    var onMovieItemClickListener: ((MovieBean.Search?) ->  Unit)? = null
+    var onMovieItemClickListener: ((MovieAll) ->  Unit)? = null
 
     //val list = listOf<MovieBean.Search>()
 
@@ -47,7 +47,7 @@ class RecyclerViewAdapter(
         val movieBean = movieList[position]
         if (movieBean != null) {
             holder.title.text = movieBean.title
-            holder.year.text = movieBean.year
+            holder.year.text = movieBean.year.toString()
             holder.genre.text = movieBean.type
             Picasso.get().load(movieBean.poster).fit().centerInside().into(holder.imageView)
         }
